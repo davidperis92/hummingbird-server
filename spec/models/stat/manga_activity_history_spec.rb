@@ -27,12 +27,15 @@ RSpec.describe Stat::MangaActivityHistory do
   let(:user) { create(:user) }
   let(:manga) { create(:manga) }
   let(:manga1) { create(:manga) }
-  let!(:le) { create(:library_entry, user: user, manga: manga) }
-  let!(:le1) { create(:library_entry, user: user, manga: manga1) }
+  let(:le) { create(:library_entry, user: user, manga: manga) }
+  let(:le1) { create(:library_entry, user: user, manga: manga1) }
+  let!(:library_event) { create(:library_event, :with_manga, user: user, library_entry: le) }
+  let!(:library_event1) { create(:library_event, :with_manga, user: user, library_entry: le1) }
 
-  before(:each) do
-    subject = Stat.find_by(user: user, type: 'Stat::MangaActivityHistory')
-    subject.recalculate!
+  before do
+    Stat::MangaActivityHistory.increment(user, library_event)
+    Stat::MangaActivityHistory.increment(user, library_event1)
+    user.stats.find_or_initialize_by(type: 'Stat::MangaActivityHistory').recalculate!
   end
 
   describe '#recalculate!' do
@@ -47,7 +50,9 @@ RSpec.describe Stat::MangaActivityHistory do
   describe '#increment' do
     before do
       manga2 = create(:manga)
-      create(:library_entry, user: user, manga: manga2)
+      le2 = create(:library_entry, user: user, manga: manga2)
+      library_event2 = create(:library_event, :with_manga, user: user, library_entry: le2)
+      Stat::MangaActivityHistory.increment(user, library_event2)
     end
     it 'should update all stats_data' do
       record = Stat.find_by(user: user, type: 'Stat::MangaActivityHistory')

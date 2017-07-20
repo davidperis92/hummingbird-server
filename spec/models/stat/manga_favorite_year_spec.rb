@@ -30,9 +30,10 @@ RSpec.describe Stat::MangaFavoriteYear do
   let!(:le) { create(:library_entry, user: user, manga: manga) }
   let!(:le1) { create(:library_entry, user: user, manga: manga1) }
 
-  before(:each) do
-    subject = Stat.find_by(user: user, type: 'Stat::MangaFavoriteYear')
-    subject.recalculate!
+  before do
+    Stat::MangaFavoriteYear.increment(user, le)
+    Stat::MangaFavoriteYear.increment(user, le1)
+    user.stats.find_or_initialize_by(type: 'Stat::MangaFavoriteYear').recalculate!
   end
 
   describe '#recalculate!' do
@@ -48,7 +49,8 @@ RSpec.describe Stat::MangaFavoriteYear do
   describe '#increment' do
     before do
       manga2 = create(:manga, start_date: 'Tue, 19 Apr 2012')
-      create(:library_entry, user: user, manga: manga2)
+      le2 = create(:library_entry, user: user, manga: manga2)
+      Stat::MangaFavoriteYear.increment(user, le2)
     end
 
     it 'should add LibraryEntry manga start_date into stats_data' do
