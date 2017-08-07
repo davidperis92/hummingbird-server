@@ -191,12 +191,15 @@ class LibraryEntry < ApplicationRecord
       self.finished_at ||= Time.now unless imported
     end
 
-    unless imported
-      # When progress is changed, update progressed_at
-      self.progressed_at = Time.now if progress_changed?
-      # When marked current and started_at doesn't exist
-      self.started_at ||= Time.now if current?
+    return if imported
+
+    if progress_changed?
+      # When progress is changed, update progressed_at, set current
+      self.status = :current unless status_changed? || progress == media&.progress_limit
+      self.progressed_at = Time.now
     end
+    # When marked current and started_at doesn't exist
+    self.started_at ||= Time.now if current?
   end
 
   after_save do
