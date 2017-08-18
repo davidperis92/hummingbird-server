@@ -180,8 +180,15 @@ end
 
 # == Route Map
 #
-# I, [2017-08-07T07:20:56.990927 #3535]  INFO -- : Raven 2.4.0 configured not to capture errors: DSN not set
+# W, [2017-08-18T00:12:14.574790 #49090]  WARN -- sentry: ** [Raven] Unable to load raven/integrations/rack-timeout: uninitialized constant Rack::Timeout::Error
+# I, [2017-08-18T00:12:24.395561 #49090]  INFO -- : Raven 2.4.0 configured not to capture errors: DSN not set
 #                                                     Prefix Verb      URI Pattern                                                                                                Controller#Action
+#                                           user_ipaddresses GET       /user-ipaddresses(.:format)                                                                                user_ipaddresses#index
+#                                                            POST      /user-ipaddresses(.:format)                                                                                user_ipaddresses#create
+#                                             user_ipaddress GET       /user-ipaddresses/:id(.:format)                                                                            user_ipaddresses#show
+#                                                            PATCH     /user-ipaddresses/:id(.:format)                                                                            user_ipaddresses#update
+#                                                            PUT       /user-ipaddresses/:id(.:format)                                                                            user_ipaddresses#update
+#                                                            DELETE    /user-ipaddresses/:id(.:format)                                                                            user_ipaddresses#destroy
 #                                   user_relationships_waifu GET       /api/edge/users/:user_id/relationships/waifu(.:format)                                                     users#show_relationship {:relationship=>"waifu"}
 #                                                            PUT|PATCH /api/edge/users/:user_id/relationships/waifu(.:format)                                                     users#update_relationship {:relationship=>"waifu"}
 #                                                            DELETE    /api/edge/users/:user_id/relationships/waifu(.:format)                                                     users#destroy_relationship {:relationship=>"waifu"}
@@ -1321,6 +1328,7 @@ end
 #                                                            POST      /api/edge/feeds/:group/:id/_read(.:format)                                                                 feeds#mark_read
 #                                                            POST      /api/edge/feeds/:group/:id/_seen(.:format)                                                                 feeds#mark_seen
 #                                                            DELETE    /api/edge/feeds/:group/:id/activities/:uuid(.:format)                                                      feeds#destroy_activity
+#                                                     embeds POST      /api/edge/embeds(.:format)                                                                                 embeds#create
 #                       site_announcement_relationships_user GET       /api/edge/site-announcements/:site_announcement_id/relationships/user(.:format)                            site_announcements#show_relationship {:relationship=>"user"}
 #                                                            PUT|PATCH /api/edge/site-announcements/:site_announcement_id/relationships/user(.:format)                            site_announcements#update_relationship {:relationship=>"user"}
 #                                                            DELETE    /api/edge/site-announcements/:site_announcement_id/relationships/user(.:format)                            site_announcements#destroy_relationship {:relationship=>"user"}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170812072909) do
+ActiveRecord::Schema.define(version: 20170817101151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1367,6 +1367,16 @@ ActiveRecord::Schema.define(version: 20170812072909) do
   add_index "uploads", ["owner_type", "owner_id"], name: "index_uploads_on_owner_type_and_owner_id", using: :btree
   add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
 
+  create_table "user_ipaddresses", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.inet     "ip_address", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_ipaddresses", ["ip_address", "user_id"], name: "index_user_ipaddresses_on_ip_address_and_user_id", unique: true, using: :btree
+  add_index "user_ipaddresses", ["user_id"], name: "index_user_ipaddresses_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                       limit: 255, default: "",          null: false
     t.string   "name",                        limit: 255
@@ -1589,5 +1599,6 @@ ActiveRecord::Schema.define(version: 20170812072909) do
   add_foreign_key "stats", "users"
   add_foreign_key "streaming_links", "streamers"
   add_foreign_key "uploads", "users"
+  add_foreign_key "user_ipaddresses", "users"
   add_foreign_key "users", "posts", column: "pinned_post_id"
 end
