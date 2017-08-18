@@ -86,6 +86,7 @@ GEM
       aws-sdk-core (= 2.3.22)
     bcrypt (3.1.11)
     benchmark-ips (2.7.2)
+    bson (4.2.2)
     buftok (0.2.0)
     builder (3.2.3)
     celluloid (0.17.3)
@@ -288,6 +289,8 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.2)
     moneta (1.0.0)
+    mongo (2.4.3)
+      bson (>= 4.2.1, < 5.0.0)
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -593,6 +596,7 @@ DEPENDENCIES
   librato-rails
   lograge
   mechanize
+  mongo
   nokogiri (~> 1.7.1)
   oauth2
   oj
