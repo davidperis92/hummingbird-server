@@ -183,6 +183,7 @@ class User < ApplicationRecord
   validates :facebook_id, uniqueness: true, allow_nil: true
 
   scope :active, ->() { where(deleted_at: nil) }
+  scope :by_email, ->(email) { where('lower(email) = ?', email.downcase) }
   scope :by_name, ->(*names) {
     where('lower(users.name) IN (?)', names.flatten.map(&:downcase))
   }
