@@ -180,15 +180,9 @@ end
 
 # == Route Map
 #
-# W, [2017-08-18T00:12:14.574790 #49090]  WARN -- sentry: ** [Raven] Unable to load raven/integrations/rack-timeout: uninitialized constant Rack::Timeout::Error
-# I, [2017-08-18T00:12:24.395561 #49090]  INFO -- : Raven 2.4.0 configured not to capture errors: DSN not set
+# W, [2017-08-22T07:03:04.898801 #69018]  WARN -- sentry: ** [Raven] Unable to load raven/integrations/rack-timeout: uninitialized constant Rack::Timeout::Error
+# I, [2017-08-22T07:03:13.566785 #69018]  INFO -- : Raven 2.4.0 configured not to capture errors: DSN not set
 #                                                     Prefix Verb      URI Pattern                                                                                                Controller#Action
-#                                           user_ipaddresses GET       /user-ipaddresses(.:format)                                                                                user_ipaddresses#index
-#                                                            POST      /user-ipaddresses(.:format)                                                                                user_ipaddresses#create
-#                                             user_ipaddress GET       /user-ipaddresses/:id(.:format)                                                                            user_ipaddresses#show
-#                                                            PATCH     /user-ipaddresses/:id(.:format)                                                                            user_ipaddresses#update
-#                                                            PUT       /user-ipaddresses/:id(.:format)                                                                            user_ipaddresses#update
-#                                                            DELETE    /user-ipaddresses/:id(.:format)                                                                            user_ipaddresses#destroy
 #                                   user_relationships_waifu GET       /api/edge/users/:user_id/relationships/waifu(.:format)                                                     users#show_relationship {:relationship=>"waifu"}
 #                                                            PUT|PATCH /api/edge/users/:user_id/relationships/waifu(.:format)                                                     users#update_relationship {:relationship=>"waifu"}
 #                                                            DELETE    /api/edge/users/:user_id/relationships/waifu(.:format)                                                     users#destroy_relationship {:relationship=>"waifu"}

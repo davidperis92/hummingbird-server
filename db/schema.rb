@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170817101151) do
+ActiveRecord::Schema.define(version: 20170822072811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1438,7 +1438,6 @@ ActiveRecord::Schema.define(version: 20170817101151) do
     t.integer  "posts_count",                             default: 0,           null: false
     t.integer  "ratings_count",                           default: 0,           null: false
     t.integer  "reviews_count",                           default: 0,           null: false
-    t.inet     "ip_addresses",                            default: [],                       array: true
     t.string   "previous_email"
     t.integer  "pinned_post_id"
     t.string   "time_zone"
